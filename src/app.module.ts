@@ -5,6 +5,9 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthModule } from './modules/auth/auth.module';
 import { AnarxiyaModule } from './modules/anarxiya/anarxiya.module';
+import { SurvivalModule } from './modules/survival/survival.module';
+import { BoxpvpModule } from './modules/boxpvp/boxpvp.module';
+import { BansModule } from './modules/bans/bans.module';
 
 @Module({
   imports: [
@@ -15,6 +18,9 @@ import { AnarxiyaModule } from './modules/anarxiya/anarxiya.module';
     }),
     AuthModule,
     AnarxiyaModule,
+    SurvivalModule,
+    BoxpvpModule,
+    BansModule,
   ],
   controllers: [],
   providers: [],
