@@ -5,7 +5,7 @@ import { TokenService } from './token.service';
 import {
   Points,
   PointsUsername,
-} from 'src/common/database/entities/token.entity';
+} from 'src/common/database/entities/anarxiya/token.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Points, PointsUsername])],

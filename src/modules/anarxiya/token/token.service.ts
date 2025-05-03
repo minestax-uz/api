@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {
   Points,
   PointsUsername,
-} from 'src/common/database/entities/token.entity';
+} from 'src/common/database/entities/anarxiya/token.entity';
 
 @Injectable()
 export class TokenService {
