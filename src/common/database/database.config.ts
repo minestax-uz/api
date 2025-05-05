@@ -8,7 +8,6 @@ export const DatabaseConfig: TypeOrmModuleOptions = {
   username: env.DB_USER,
   password: env.DB_PASS,
   database: 's1_bans',
-  logging: true,
   synchronize: false,
   autoLoadEntities: true,
 };
