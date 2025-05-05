@@ -1,0 +1,18 @@
+POST /api/auth/login - auth login
+POST /api/auth/refresh - auth refresh token
+GET /api/anarxiya/permissions/{username} - get permissions
+POST /api/anarxiya/permissions/{username}/{permission} - add permission
+GET /api/survival/permissions/{username} - get permissions
+POST /api/survival/permissions/{username}/{permission} - add permission
+GET /api/boxpvp/permissions/{username} - get permissions
+POST /api/boxpvp/permissions/{username}/{permission} - add permission
+GET /api/anarxiya/token/{username} - get token
+POST /api/anarxiya/token/{username}/{token} - add token
+GET /api/bans - get bans
+POST /api/bans/proof - add ban proof
+POST /api/bans/proof/upload - upload ban proof
+GET /api/bans/{id}/proofs - get ban proofs
+DELETE /api/bans/proof/{id} - delete ban proof
+POST /api/bans/comment - add ban comment
+GET /api/bans/{id}/comments - get ban comments
+DELETE /api/bans/comment/{id} - delete ban comment
