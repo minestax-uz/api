@@ -13,6 +13,7 @@ import { CoreApiResponse } from 'src/common/response/core.response';
 
 import { DecoratorWrapper } from 'src/common/auth/decorator.auth';
 import { TokenService } from './token.service';
+import { Role } from 'src/common/auth/roles/role.enum';
 
 @ApiTags('token')
 @Controller('anarxiya/token')
@@ -26,7 +27,7 @@ export class TokenController {
   }
 
   @Post('/:username/:token')
-  @DecoratorWrapper('add token')
+  @DecoratorWrapper('add token', true, [Role.Admin])
   async add(
     @Param('username') username: string,
     @Param('token', ParseIntPipe) token: number,
@@ -37,7 +38,7 @@ export class TokenController {
   }
 
   @Patch('/:username/:token')
-  @DecoratorWrapper('set token')
+  @DecoratorWrapper('set token', true, [Role.Admin])
   async set(
     @Param('username') username: string,
     @Param('token', ParseIntPipe) token: number,
@@ -48,7 +49,7 @@ export class TokenController {
   }
 
   @Delete('/:username/:token')
-  @DecoratorWrapper('remove token')
+  @DecoratorWrapper('remove token', true, [Role.Admin])
   async remove(
     @Param('username') username: string,
     @Param('token', ParseIntPipe) token: number,

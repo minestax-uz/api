@@ -1,8 +1,8 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CoreApiResponse } from 'src/common/response/core.response';
-import { LoginauthDto } from './dto/login-auth.dto';
-import { RefreshauthDto } from './dto/refresh-auth.dto';
+import { LoginAuthDto } from './dto/login-auth.dto';
+import { RefreshAuthDto } from './dto/refresh-auth.dto';
 import { DecoratorWrapper } from 'src/common/auth/decorator.auth';
 import { AuthService } from './auth.service';
 
@@ -13,13 +13,13 @@ export class AuthController {
 
   @Post('login')
   @DecoratorWrapper('auth login')
-  async login(@Body() dto: LoginauthDto) {
+  async login(@Body() dto: LoginAuthDto) {
     return CoreApiResponse.success(await this.authService.login(dto));
   }
 
   @Post('refresh')
   @DecoratorWrapper('auth refresh token')
-  async refresh(@Body() dto: RefreshauthDto) {
+  async refresh(@Body() dto: RefreshAuthDto) {
     return CoreApiResponse.success(await this.authService.refresh(dto));
   }
 }

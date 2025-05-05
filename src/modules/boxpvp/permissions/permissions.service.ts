@@ -20,6 +20,23 @@ export class PermissionsService {
     private playerPermissionsRepo: Repository<PlayerPermissions>,
   ) {}
 
+  async getPlayerRole(username: string): Promise<string> {
+    const player = await this.playersRepo.findOne({
+      where: { username },
+    });
+    if (!player) throw new HttpError({ code: 'PLAYER_NOT_FOUND' });
+
+    const playerPermissions = await this.playerPermissionsRepo.find({
+      where: { uuid: player.uuid },
+    });
+
+    const playerPerms = playerPermissions.map((p) => p.permission);
+
+    if (playerPerms.includes('group.admin')) return 'admin';
+    if (playerPerms.includes('group.moder')) return 'moder';
+    return 'user';
+  }
+
   async getPlayerPermissions(username: string): Promise<string[]> {
     const player = await this.playersRepo.findOne({
       where: { username },
