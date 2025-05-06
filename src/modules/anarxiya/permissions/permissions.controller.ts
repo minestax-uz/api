@@ -28,7 +28,7 @@ export class PermissionsController {
   }
 
   @Post('/:username/:permission')
-  @DecoratorWrapper('add permission', true, [Role.Admin])
+  @DecoratorWrapper('add permission', true, [Role.ADMIN])
   async add(
     @Param('username') username: string,
     @Param('permission') permission: string,
@@ -39,7 +39,7 @@ export class PermissionsController {
   }
 
   @Delete('/:username/:permission')
-  @DecoratorWrapper('remove permission', true, [Role.Admin])
+  @DecoratorWrapper('remove permission', true, [Role.ADMIN])
   async remove(
     @Param('username') username: string,
     @Param('permission') permission: string,

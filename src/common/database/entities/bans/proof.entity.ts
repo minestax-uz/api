@@ -21,7 +21,4 @@ export class Proof {
 
   @Column()
   file_type: string;
-
-  @CreateDateColumn()
-  create_at: string;
 }

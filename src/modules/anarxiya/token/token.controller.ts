@@ -27,7 +27,7 @@ export class TokenController {
   }
 
   @Post('/:username/:token')
-  @DecoratorWrapper('add token', true, [Role.Admin])
+  @DecoratorWrapper('add token', true, [Role.ADMIN])
   async add(
     @Param('username') username: string,
     @Param('token', ParseIntPipe) token: number,
@@ -38,7 +38,7 @@ export class TokenController {
   }
 
   @Patch('/:username/:token')
-  @DecoratorWrapper('set token', true, [Role.Admin])
+  @DecoratorWrapper('set token', true, [Role.ADMIN])
   async set(
     @Param('username') username: string,
     @Param('token', ParseIntPipe) token: number,
@@ -49,7 +49,7 @@ export class TokenController {
   }
 
   @Delete('/:username/:token')
-  @DecoratorWrapper('remove token', true, [Role.Admin])
+  @DecoratorWrapper('remove token', true, [Role.ADMIN])
   async remove(
     @Param('username') username: string,
     @Param('token', ParseIntPipe) token: number,

@@ -30,13 +30,13 @@ export class BansController {
   constructor(private readonly bansService: BansService) {}
 
   @Get()
-  @DecoratorWrapper('get bans', true, [Role.User, Role.Admin, Role.Moder])
+  @DecoratorWrapper('get bans')
   async get(@Query() dto: GetBansDto) {
     return CoreApiResponse.success(await this.bansService.get(dto));
   }
 
   @Post('proof')
-  @DecoratorWrapper('add ban proof', true, [Role.Admin, Role.Moder])
+  @DecoratorWrapper('add ban proof', true, [Role.ADMIN, Role.MODER])
   async addProof(@Body() dto: AddProofDto, @Request() req) {
     return CoreApiResponse.success(
       await this.bansService.addProof(dto, req.user.username),
@@ -44,7 +44,7 @@ export class BansController {
   }
 
   @Post('proof/upload')
-  @DecoratorWrapper('upload ban proof', true, [Role.Admin, Role.Moder])
+  @DecoratorWrapper('upload ban proof', true, [Role.ADMIN, Role.MODER])
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -93,15 +93,15 @@ export class BansController {
   }
 
   @Get(':id/proofs')
-  @DecoratorWrapper('get ban proofs', true, [Role.User, Role.Admin, Role.Moder])
+  @DecoratorWrapper('get ban proofs', true, [Role.USER, Role.ADMIN, Role.MODER])
   async getProofs(@Param('id', ParseIntPipe) id: number) {
     return CoreApiResponse.success(await this.bansService.getProofs(id));
   }
 
   @Delete('proof/:id')
-  @DecoratorWrapper('delete ban proof', true, [Role.Admin, Role.Moder])
+  @DecoratorWrapper('delete ban proof', true, [Role.ADMIN, Role.MODER])
   async deleteProof(@Param('id', ParseIntPipe) id: number, @Request() req) {
-    const isAdmin = req.user.role === Role.Admin;
+    const isAdmin = req.user.role === Role.ADMIN;
     return CoreApiResponse.success(
       await this.bansService.deleteProof(id, req.user.username, isAdmin),
     );
@@ -109,9 +109,9 @@ export class BansController {
 
   @Post('comment')
   @DecoratorWrapper('add ban comment', true, [
-    Role.User,
-    Role.Admin,
-    Role.Moder,
+    Role.USER,
+    Role.ADMIN,
+    Role.MODER,
   ])
   async addComment(@Body() dto: AddCommentDto, @Request() req) {
     return CoreApiResponse.success(
@@ -121,18 +121,18 @@ export class BansController {
 
   @Get(':id/comments')
   @DecoratorWrapper('get ban comments', true, [
-    Role.User,
-    Role.Admin,
-    Role.Moder,
+    Role.USER,
+    Role.ADMIN,
+    Role.MODER,
   ])
   async getComments(@Param('id', ParseIntPipe) id: number) {
     return CoreApiResponse.success(await this.bansService.getComments(id));
   }
 
   @Delete('comment/:id')
-  @DecoratorWrapper('delete ban comment', true, [Role.Admin, Role.Moder])
+  @DecoratorWrapper('delete ban comment', true, [Role.ADMIN, Role.MODER])
   async deleteComment(@Param('id', ParseIntPipe) id: number, @Request() req) {
-    const isAdmin = req.user.role === Role.Admin;
+    const isAdmin = req.user.role === Role.ADMIN;
     return CoreApiResponse.success(
       await this.bansService.deleteComment(id, req.user.username, isAdmin),
     );

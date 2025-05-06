@@ -9,7 +9,6 @@ import { Bans } from 'src/common/database/entities/bans/bans.entity';
 import { Proof } from 'src/common/database/entities/bans/proof.entity';
 import { Comment } from 'src/common/database/entities/bans/comments.entity';
 import { HttpError } from 'src/common/exception/http.error';
-import { handleEncrypted } from 'src/common/utils/hash/media-upload.utils';
 
 @Injectable()
 export class BansService {
@@ -138,7 +137,6 @@ export class BansService {
 
     return await this.proofRepo.find({
       where: { ban_id: banId },
-      order: { create_at: 'DESC' },
     });
   }
 
@@ -192,19 +190,17 @@ export class BansService {
     file: Express.Multer.File,
     username: string,
   ) {
-    const ban = await this.bansRepo.findOne({ where: { id: dto.ban_id } });
+    const ban = await this.bansRepo.findOne({ where: { id: +dto.ban_id } });
     if (!ban) throw new HttpError({ code: 'BAN_NOT_FOUND' });
 
-    // Generate encrypted token for the file path
-    const encryptedToken = handleEncrypted();
     const fileExtension = file.originalname.split('.').pop();
-    const filePath = `proofs/${dto.ban_id}/${encryptedToken}.${fileExtension}`;
+    const filePath = `proofs/${dto.ban_id}-${Date.now().toString(15)}.${fileExtension}`;
 
     const proof = this.proofRepo.create({
-      ban_id: dto.ban_id,
+      ban_id: +dto.ban_id,
       moderator_name: username,
       file_path: filePath,
-      file_type: file.mimetype,
+      file_type: file.mimetype.split('/')[0],
     });
 
     return await this.proofRepo.save(proof);

@@ -30,7 +30,7 @@ export class RolesGuard implements CanActivate {
       const validAuth: any = verify(bearerToken, env.ACCESS_TOKEN_SECRET);
       if (!validAuth) HttpError({ code: 'LOGIN_FAILED' });
 
-      request.auth = {
+      request.user = {
         ...validAuth,
       };
       return requiredRoles?.includes(validAuth.role);

@@ -34,11 +34,18 @@ export class AuthService {
     return 'user';
   }
 
+  async get(id: string) {
+    const user = await this.authRepo.findOneBy({ uniqueId: id });
+    if (!user) return HttpError({ code: 'USER_NOT_FOUND' });
+    const role = this.getPlayerRole(user.lastNickname);
+    return { id: user.uniqueId, username: user.lastNickname, role };
+  }
+
   async login(dto: LoginAuthDto) {
     const user = await this.authRepo.findOneBy({ lastNickname: dto.username });
     if (!user) return HttpError({ code: 'USER_NOT_FOUND' });
 
-    let role = Role.User;
+    let role = Role.USER;
 
     let passwordMatch = false;
     try {
@@ -49,7 +56,7 @@ export class AuthService {
 
     if (!passwordMatch) HttpError({ code: 'WRONG_PASSWORD' });
 
-    role = Role[await this.getPlayerRole(dto.username)];
+    role = Role[(await this.getPlayerRole(dto.username)).toUpperCase()];
 
     const [accessToken, refreshToken] = [
       sign(
@@ -89,7 +96,7 @@ export class AuthService {
     if (!user) HttpError({ code: 'USER_NOT_FOUND' });
 
     const accessToken = sign(
-      { id: user.uniqueId, username: user.lastNickname, role: Role.User },
+      { id: user.uniqueId, username: user.lastNickname, role: Role.USER },
       env.ACCESS_TOKEN_SECRET,
       { expiresIn: '2h' },
     );
