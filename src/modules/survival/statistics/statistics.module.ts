@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StatisticsController } from './statistics.controller';
 import { StatisticsService } from './statistics.service';
+import { SurvivalDatabaseModule } from '../database/database.module';
+import { ModuleAvailabilityModule } from 'src/common/service/module-availability.module';
 import {
   SurvivalPlanUser,
   SurvivalPlanServer,
@@ -17,18 +19,23 @@ import {
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      SurvivalPlanUser,
-      SurvivalPlanServer,
-      SurvivalPlanSession,
-      SurvivalPlanKill,
-      SurvivalPlanWorld,
-      SurvivalPlanTps,
-      SurvivalPlanPing,
-      SurvivalPlanNickname,
-      SurvivalPlanGeolocation,
-      SurvivalPlanUserInfo,
-    ]),
+    SurvivalDatabaseModule,
+    ModuleAvailabilityModule,
+    TypeOrmModule.forFeature(
+      [
+        SurvivalPlanUser,
+        SurvivalPlanServer,
+        SurvivalPlanSession,
+        SurvivalPlanKill,
+        SurvivalPlanWorld,
+        SurvivalPlanTps,
+        SurvivalPlanPing,
+        SurvivalPlanNickname,
+        SurvivalPlanGeolocation,
+        SurvivalPlanUserInfo,
+      ],
+      'survival',
+    ),
   ],
   controllers: [StatisticsController],
   providers: [StatisticsService],

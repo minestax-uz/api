@@ -14,32 +14,35 @@ import {
   AnarxiyaPlanUserInfo,
 } from 'src/common/database/entities/anarxiya/anarxiyaPlan.entity';
 import { BaseStatisticsService } from 'src/common/service/baseStatistics.service';
+import { ModuleAvailabilityService } from 'src/common/service/module-availability.service';
 
 @Injectable()
 export class StatisticsService extends BaseStatisticsService {
   constructor(
-    @InjectRepository(AnarxiyaPlanUser)
+    moduleAvailabilityService: ModuleAvailabilityService,
+    @InjectRepository(AnarxiyaPlanUser, 'anarxiya')
     planUserRepo: Repository<AnarxiyaPlanUser>,
-    @InjectRepository(AnarxiyaPlanServer)
+    @InjectRepository(AnarxiyaPlanServer, 'anarxiya')
     planServerRepo: Repository<AnarxiyaPlanServer>,
-    @InjectRepository(AnarxiyaPlanSession)
+    @InjectRepository(AnarxiyaPlanSession, 'anarxiya')
     planSessionRepo: Repository<AnarxiyaPlanSession>,
-    @InjectRepository(AnarxiyaPlanKill)
+    @InjectRepository(AnarxiyaPlanKill, 'anarxiya')
     planKillRepo: Repository<AnarxiyaPlanKill>,
-    @InjectRepository(AnarxiyaPlanWorld)
+    @InjectRepository(AnarxiyaPlanWorld, 'anarxiya')
     planWorldRepo: Repository<AnarxiyaPlanWorld>,
-    @InjectRepository(AnarxiyaPlanTps)
+    @InjectRepository(AnarxiyaPlanTps, 'anarxiya')
     planTpsRepo: Repository<AnarxiyaPlanTps>,
-    @InjectRepository(AnarxiyaPlanPing)
+    @InjectRepository(AnarxiyaPlanPing, 'anarxiya')
     planPingRepo: Repository<AnarxiyaPlanPing>,
-    @InjectRepository(AnarxiyaPlanNickname)
+    @InjectRepository(AnarxiyaPlanNickname, 'anarxiya')
     planNicknameRepo: Repository<AnarxiyaPlanNickname>,
-    @InjectRepository(AnarxiyaPlanGeolocation)
+    @InjectRepository(AnarxiyaPlanGeolocation, 'anarxiya')
     planGeolocationRepo: Repository<AnarxiyaPlanGeolocation>,
-    @InjectRepository(AnarxiyaPlanUserInfo)
+    @InjectRepository(AnarxiyaPlanUserInfo, 'anarxiya')
     planUserInfoRepo: Repository<AnarxiyaPlanUserInfo>,
   ) {
     super(
+      moduleAvailabilityService,
       planUserRepo,
       planServerRepo,
       planSessionRepo,

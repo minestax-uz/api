@@ -8,9 +8,11 @@ import {
   Player,
   PlayerPermissions,
 } from 'src/common/database/entities/boxpvp/boxpvpRank.entity';
+import { BoxpvpDatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [
+    BoxpvpDatabaseModule,
     TypeOrmModule.forFeature([
       Player,
       Group,

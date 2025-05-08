@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StatisticsController } from './statistics.controller';
 import { StatisticsService } from './statistics.service';
+import { AnarxiyaDatabaseModule } from '../database/database.module';
+import { ModuleAvailabilityModule } from 'src/common/service/module-availability.module';
 import {
   AnarxiyaPlanUser,
   AnarxiyaPlanServer,
@@ -17,18 +19,23 @@ import {
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      AnarxiyaPlanUser,
-      AnarxiyaPlanServer,
-      AnarxiyaPlanSession,
-      AnarxiyaPlanKill,
-      AnarxiyaPlanWorld,
-      AnarxiyaPlanTps,
-      AnarxiyaPlanPing,
-      AnarxiyaPlanNickname,
-      AnarxiyaPlanGeolocation,
-      AnarxiyaPlanUserInfo,
-    ]),
+    AnarxiyaDatabaseModule,
+    ModuleAvailabilityModule,
+    TypeOrmModule.forFeature(
+      [
+        AnarxiyaPlanUser,
+        AnarxiyaPlanServer,
+        AnarxiyaPlanSession,
+        AnarxiyaPlanKill,
+        AnarxiyaPlanWorld,
+        AnarxiyaPlanTps,
+        AnarxiyaPlanPing,
+        AnarxiyaPlanNickname,
+        AnarxiyaPlanGeolocation,
+        AnarxiyaPlanUserInfo,
+      ],
+      'anarxiya',
+    ),
   ],
   controllers: [StatisticsController],
   providers: [StatisticsService],

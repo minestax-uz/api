@@ -13,7 +13,7 @@ export class StatisticsController {
   @DecoratorWrapper('get boxpvp server stats')
   async getFullServerStats() {
     return CoreApiResponse.success(
-      await this.statisticsService.getFullServerStats(),
+      await this.statisticsService.getFullServerStats('boxpvp'),
     );
   }
 
@@ -21,7 +21,7 @@ export class StatisticsController {
   @DecoratorWrapper('get boxpvp server status')
   async getServerStats(@Query('range', ParseIntPipe) range: number = 24) {
     return CoreApiResponse.success(
-      await this.statisticsService.getServerStats(range),
+      await this.statisticsService.getServerStats('boxpvp', range),
     );
   }
 
@@ -32,7 +32,7 @@ export class StatisticsController {
     @Query('range') range: number = 24,
   ) {
     return CoreApiResponse.success(
-      await this.statisticsService.getPlayerStats(username, range),
+      await this.statisticsService.getPlayerStats('boxpvp', username, range),
     );
   }
 }

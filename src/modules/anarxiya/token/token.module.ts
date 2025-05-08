@@ -6,9 +6,13 @@ import {
   Points,
   PointsUsername,
 } from 'src/common/database/entities/anarxiya/token.entity';
+import { AnarxiyaDatabaseModule } from '../database/database.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Points, PointsUsername])],
+  imports: [
+    AnarxiyaDatabaseModule,
+    TypeOrmModule.forFeature([Points, PointsUsername]),
+  ],
   controllers: [TokenController],
   providers: [TokenService],
 })

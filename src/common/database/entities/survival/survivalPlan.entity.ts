@@ -12,32 +12,32 @@ import {
   PlanUserInfo,
 } from '../plan';
 
-@Entity({ database: '', name: 'plan_users' })
+@Entity({ database: 's13_stats', name: 'plan_users' })
 export class SurvivalPlanUser extends PlanUser {}
 
-@Entity({ database: '', name: 'plan_servers' })
+@Entity({ database: 's13_stats', name: 'plan_servers' })
 export class SurvivalPlanServer extends PlanServer {}
 
-@Entity({ database: '', name: 'plan_sessions' })
+@Entity({ database: 's13_stats', name: 'plan_sessions' })
 export class SurvivalPlanSession extends PlanSession {}
 
-@Entity({ database: '', name: 'plan_kills' })
+@Entity({ database: 's13_stats', name: 'plan_kills' })
 export class SurvivalPlanKill extends PlanKill {}
 
-@Entity({ database: '', name: 'plan_worlds' })
+@Entity({ database: 's13_stats', name: 'plan_worlds' })
 export class SurvivalPlanWorld extends PlanWorld {}
 
-@Entity({ database: '', name: 'plan_tps' })
+@Entity({ database: 's13_stats', name: 'plan_tps' })
 export class SurvivalPlanTps extends PlanTps {}
 
-@Entity({ database: '', name: 'plan_ping' })
+@Entity({ database: 's13_stats', name: 'plan_ping' })
 export class SurvivalPlanPing extends PlanPing {}
 
-@Entity({ database: '', name: 'plan_nicknames' })
+@Entity({ database: 's13_stats', name: 'plan_nicknames' })
 export class SurvivalPlanNickname extends PlanNickname {}
 
-@Entity({ database: '', name: 'plan_geolocations' })
+@Entity({ database: 's13_stats', name: 'plan_geolocations' })
 export class SurvivalPlanGeolocation extends PlanGeolocation {}
 
-@Entity({ database: '', name: 'plan_user_info' })
+@Entity({ database: 's13_stats', name: 'plan_user_info' })
 export class SurvivalPlanUserInfo extends PlanUserInfo {}

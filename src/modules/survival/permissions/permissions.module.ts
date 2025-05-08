@@ -8,9 +8,11 @@ import {
   Player,
   PlayerPermissions,
 } from 'src/common/database/entities/survival/survivalRank.entity';
+import { SurvivalDatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [
+    SurvivalDatabaseModule,
     TypeOrmModule.forFeature([
       Player,
       Group,

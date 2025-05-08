@@ -14,32 +14,35 @@ import {
   BoxpvpPlanUserInfo,
 } from 'src/common/database/entities/boxpvp/boxpvpPlan.entity';
 import { BaseStatisticsService } from 'src/common/service/baseStatistics.service';
+import { ModuleAvailabilityService } from 'src/common/service/module-availability.service';
 
 @Injectable()
 export class StatisticsService extends BaseStatisticsService {
   constructor(
-    @InjectRepository(BoxpvpPlanUser)
+    moduleAvailabilityService: ModuleAvailabilityService,
+    @InjectRepository(BoxpvpPlanUser, 'boxpvp')
     planUserRepo: Repository<BoxpvpPlanUser>,
-    @InjectRepository(BoxpvpPlanServer)
+    @InjectRepository(BoxpvpPlanServer, 'boxpvp')
     planServerRepo: Repository<BoxpvpPlanServer>,
-    @InjectRepository(BoxpvpPlanSession)
+    @InjectRepository(BoxpvpPlanSession, 'boxpvp')
     planSessionRepo: Repository<BoxpvpPlanSession>,
-    @InjectRepository(BoxpvpPlanKill)
+    @InjectRepository(BoxpvpPlanKill, 'boxpvp')
     planKillRepo: Repository<BoxpvpPlanKill>,
-    @InjectRepository(BoxpvpPlanWorld)
+    @InjectRepository(BoxpvpPlanWorld, 'boxpvp')
     planWorldRepo: Repository<BoxpvpPlanWorld>,
-    @InjectRepository(BoxpvpPlanTps)
+    @InjectRepository(BoxpvpPlanTps, 'boxpvp')
     planTpsRepo: Repository<BoxpvpPlanTps>,
-    @InjectRepository(BoxpvpPlanPing)
+    @InjectRepository(BoxpvpPlanPing, 'boxpvp')
     planPingRepo: Repository<BoxpvpPlanPing>,
-    @InjectRepository(BoxpvpPlanNickname)
+    @InjectRepository(BoxpvpPlanNickname, 'boxpvp')
     planNicknameRepo: Repository<BoxpvpPlanNickname>,
-    @InjectRepository(BoxpvpPlanGeolocation)
+    @InjectRepository(BoxpvpPlanGeolocation, 'boxpvp')
     planGeolocationRepo: Repository<BoxpvpPlanGeolocation>,
-    @InjectRepository(BoxpvpPlanUserInfo)
+    @InjectRepository(BoxpvpPlanUserInfo, 'boxpvp')
     planUserInfoRepo: Repository<BoxpvpPlanUserInfo>,
   ) {
     super(
+      moduleAvailabilityService,
       planUserRepo,
       planServerRepo,
       planSessionRepo,

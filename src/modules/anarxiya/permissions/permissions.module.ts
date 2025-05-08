@@ -8,9 +8,11 @@ import {
   Player,
   PlayerPermissions,
 } from 'src/common/database/entities/anarxiya/anarxiyaRank.entity';
+import { AnarxiyaDatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [
+    AnarxiyaDatabaseModule,
     TypeOrmModule.forFeature([
       Player,
       Group,

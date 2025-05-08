@@ -7,7 +7,7 @@ import { Comment } from 'src/common/database/entities/bans/comments.entity';
 import { Proof } from 'src/common/database/entities/bans/proof.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Bans, Comment, Proof])],
+  imports: [TypeOrmModule.forFeature([Bans, Comment, Proof], 'default')],
   controllers: [BansController],
   providers: [BansService],
 })
