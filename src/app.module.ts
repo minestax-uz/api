@@ -8,7 +8,6 @@ import { AnarxiyaModule } from './modules/anarxiya/anarxiya.module';
 import { SurvivalModule } from './modules/survival/survival.module';
 import { BoxpvpModule } from './modules/boxpvp/boxpvp.module';
 import { BansModule } from './modules/bans/bans.module';
-import { StatisticsModule } from './modules/statistics/statistics.module';
 
 @Module({
   imports: [
@@ -22,7 +21,6 @@ import { StatisticsModule } from './modules/statistics/statistics.module';
     SurvivalModule,
     BoxpvpModule,
     BansModule,
-    StatisticsModule,
   ],
   controllers: [],
   providers: [],
