@@ -2,7 +2,6 @@ export * from './plan-users.entity';
 export * from './plan-servers.entity';
 export * from './plan-sessions.entity';
 export * from './plan-kills.entity';
-export * from './plan-world-times.entity';
 export * from './plan-worlds.entity';
 export * from './plan-tps.entity';
 export * from './plan-ping.entity';

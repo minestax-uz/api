@@ -4,7 +4,6 @@ import {
   PlanServer,
   PlanSession,
   PlanKill,
-  PlanWorldTime,
   PlanWorld,
   PlanTps,
   PlanPing,
@@ -24,9 +23,6 @@ export class AnarxiyaPlanSession extends PlanSession {}
 
 @Entity({ database: '', name: 'plan_kills' })
 export class AnarxiyaPlanKill extends PlanKill {}
-
-@Entity({ database: '', name: 'plan_world_times' })
-export class AnarxiyaPlanWorldTime extends PlanWorldTime {}
 
 @Entity({ database: '', name: 'plan_worlds' })
 export class AnarxiyaPlanWorld extends PlanWorld {}

@@ -4,7 +4,6 @@ import {
   PlanServer,
   PlanSession,
   PlanKill,
-  PlanWorldTime,
   PlanWorld,
   PlanTps,
   PlanPing,
@@ -24,9 +23,6 @@ export class SurvivalPlanSession extends PlanSession {}
 
 @Entity({ database: '', name: 'plan_kills' })
 export class SurvivalPlanKill extends PlanKill {}
-
-@Entity({ database: '', name: 'plan_world_times' })
-export class SurvivalPlanWorldTime extends PlanWorldTime {}
 
 @Entity({ database: '', name: 'plan_worlds' })
 export class SurvivalPlanWorld extends PlanWorld {}

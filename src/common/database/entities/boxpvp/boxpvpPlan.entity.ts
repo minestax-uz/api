@@ -4,7 +4,6 @@ import {
   PlanServer,
   PlanSession,
   PlanKill,
-  PlanWorldTime,
   PlanWorld,
   PlanTps,
   PlanPing,
@@ -24,9 +23,6 @@ export class BoxpvpPlanSession extends PlanSession {}
 
 @Entity({ database: 's12_stats', name: 'plan_kills' })
 export class BoxpvpPlanKill extends PlanKill {}
-
-@Entity({ database: 's12_stats', name: 'plan_world_times' })
-export class BoxpvpPlanWorldTime extends PlanWorldTime {}
 
 @Entity({ database: 's12_stats', name: 'plan_worlds' })
 export class BoxpvpPlanWorld extends PlanWorld {}

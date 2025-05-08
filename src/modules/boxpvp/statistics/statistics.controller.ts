@@ -1,11 +1,8 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CoreApiResponse } from 'src/common/response/core.response';
 import { DecoratorWrapper } from 'src/common/auth/decorator.auth';
 import { StatisticsService } from './statistics.service';
-import { GetServerStatsDto } from './dto/get-server-stats.dto';
-import { GetPlayerStatsDto } from './dto/get-player-stats.dto';
-import { GetLeaderboardDto } from './dto/get-leaderboard.dto';
 
 @ApiTags('boxpvp-statistics')
 @Controller('boxpvp/statistics')
@@ -14,33 +11,28 @@ export class StatisticsController {
 
   @Get('server')
   @DecoratorWrapper('get boxpvp server stats')
-  async getServerStats(@Query() dto: GetServerStatsDto) {
+  async getFullServerStats() {
     return CoreApiResponse.success(
-      await this.statisticsService.getServerStats(dto),
+      await this.statisticsService.getFullServerStats(),
     );
   }
 
-  @Get('player')
+  @Get()
+  @DecoratorWrapper('get boxpvp server status')
+  async getServerStats(@Query('range', ParseIntPipe) range: number = 24) {
+    return CoreApiResponse.success(
+      await this.statisticsService.getServerStats(range),
+    );
+  }
+
+  @Get('player/:username')
   @DecoratorWrapper('get boxpvp player stats')
-  async getPlayerStats(@Query() dto: GetPlayerStatsDto) {
+  async getPlayerStats(
+    @Param('username') username: string,
+    @Query('range') range: number = 24,
+  ) {
     return CoreApiResponse.success(
-      await this.statisticsService.getPlayerStats(dto),
-    );
-  }
-
-  @Get('leaderboard')
-  @DecoratorWrapper('get boxpvp leaderboard')
-  async getLeaderboard(@Query() dto: GetLeaderboardDto) {
-    return CoreApiResponse.success(
-      await this.statisticsService.getLeaderboard(dto),
-    );
-  }
-
-  @Get('search/:query')
-  @DecoratorWrapper('search boxpvp players')
-  async searchPlayers(@Param('query') query: string) {
-    return CoreApiResponse.success(
-      await this.statisticsService.searchPlayers(query),
+      await this.statisticsService.getPlayerStats(username, range),
     );
   }
 }

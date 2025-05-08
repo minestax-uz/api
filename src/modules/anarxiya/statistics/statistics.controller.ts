@@ -1,11 +1,8 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CoreApiResponse } from 'src/common/response/core.response';
 import { DecoratorWrapper } from 'src/common/auth/decorator.auth';
 import { StatisticsService } from './statistics.service';
-import { GetServerStatsDto } from './dto/get-server-stats.dto';
-import { GetPlayerStatsDto } from './dto/get-player-stats.dto';
-import { GetLeaderboardDto } from './dto/get-leaderboard.dto';
 
 @ApiTags('anarxiya-statistics')
 @Controller('anarxiya/statistics')
@@ -13,34 +10,29 @@ export class StatisticsController {
   constructor(private readonly statisticsService: StatisticsService) {}
 
   @Get('server')
-  @DecoratorWrapper('get anarxiya server stats')
-  async getServerStats(@Query() dto: GetServerStatsDto) {
+  @DecoratorWrapper('get Anarxiya server stats')
+  async getFullServerStats() {
     return CoreApiResponse.success(
-      await this.statisticsService.getServerStats(dto),
+      await this.statisticsService.getFullServerStats(),
     );
   }
 
-  @Get('player')
-  @DecoratorWrapper('get anarxiya player stats')
-  async getPlayerStats(@Query() dto: GetPlayerStatsDto) {
+  @Get()
+  @DecoratorWrapper('get Anarxiya server status')
+  async getServerStats(@Query('range', ParseIntPipe) range: number = 24) {
     return CoreApiResponse.success(
-      await this.statisticsService.getPlayerStats(dto),
+      await this.statisticsService.getServerStats(range),
     );
   }
 
-  @Get('leaderboard')
-  @DecoratorWrapper('get anarxiya leaderboard')
-  async getLeaderboard(@Query() dto: GetLeaderboardDto) {
+  @Get('player/:username')
+  @DecoratorWrapper('get Anarxiya player stats')
+  async getPlayerStats(
+    @Param('username') username: string,
+    @Query('range') range: number = 24,
+  ) {
     return CoreApiResponse.success(
-      await this.statisticsService.getLeaderboard(dto),
-    );
-  }
-
-  @Get('search/:query')
-  @DecoratorWrapper('search anarxiya players')
-  async searchPlayers(@Param('query') query: string) {
-    return CoreApiResponse.success(
-      await this.statisticsService.searchPlayers(query),
+      await this.statisticsService.getPlayerStats(username, range),
     );
   }
 }

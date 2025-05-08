@@ -3,6 +3,9 @@ import { Column, Entity, PrimaryColumn } from 'typeorm';
 @Entity({ database: '', name: 'plan_tps' })
 export class PlanTps {
   @PrimaryColumn()
+  id: number;
+  
+  @Column()
   server_id: number;
 
   @Column()
