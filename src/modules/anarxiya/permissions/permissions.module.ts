@@ -13,12 +13,10 @@ import { AnarxiyaDatabaseModule } from '../database/database.module';
 @Module({
   imports: [
     AnarxiyaDatabaseModule,
-    TypeOrmModule.forFeature([
-      Player,
-      Group,
-      GroupPermissions,
-      PlayerPermissions,
-    ]),
+    TypeOrmModule.forFeature(
+      [Player, Group, GroupPermissions, PlayerPermissions],
+      'anarxiya_rank', // Specify the connection name for the rank database
+    ),
   ],
   controllers: [PermissionsController],
   providers: [PermissionsService],

@@ -13,11 +13,11 @@ import { BasePermissionsService } from 'src/common/service/basePermisson.service
 @Injectable()
 export class PermissionsService extends BasePermissionsService {
   constructor(
-    @InjectRepository(Group) groupRepo: Repository<Group>,
-    @InjectRepository(Player) playersRepo: Repository<Player>,
-    @InjectRepository(GroupPermissions)
+    @InjectRepository(Group, 'anarxiya_rank') groupRepo: Repository<Group>,
+    @InjectRepository(Player, 'anarxiya_rank') playersRepo: Repository<Player>,
+    @InjectRepository(GroupPermissions, 'anarxiya_rank')
     groupPermissionsRepo: Repository<GroupPermissions>,
-    @InjectRepository(PlayerPermissions)
+    @InjectRepository(PlayerPermissions, 'anarxiya_rank')
     playerPermissionsRepo: Repository<PlayerPermissions>,
   ) {
     super(groupRepo, playersRepo, groupPermissionsRepo, playerPermissionsRepo);

@@ -58,20 +58,31 @@ export class AuthService {
 
     role = Role[(await this.getPlayerRole(dto.username)).toUpperCase()];
 
+    // Create tokens with explicit expiration times
+    const now = Math.floor(Date.now() / 1000); // Current time in seconds
+    const accessTokenExpiry = now + 2 * 60 * 60; // 2 hours from now
+    const refreshTokenExpiry = now + 24 * 60 * 60; // 24 hours from now
+
     const [accessToken, refreshToken] = [
       sign(
-        { id: user.uniqueId, username: user.lastNickname, role },
-        env.ACCESS_TOKEN_SECRET,
         {
-          expiresIn: '2h',
+          id: user.uniqueId,
+          username: user.lastNickname,
+          role,
+          iat: now,
+          exp: accessTokenExpiry,
         },
+        env.ACCESS_TOKEN_SECRET,
       ),
       sign(
-        { id: user.uniqueId, username: user.lastNickname, role },
-        env.REFRESH_TOKEN_SECRET,
         {
-          expiresIn: '1d',
+          id: user.uniqueId,
+          username: user.lastNickname,
+          role,
+          iat: now,
+          exp: refreshTokenExpiry,
         },
+        env.REFRESH_TOKEN_SECRET,
       ),
     ];
 
@@ -95,11 +106,26 @@ export class AuthService {
     const user = await this.authRepo.findOneBy({ uniqueId: authData.id });
     if (!user) HttpError({ code: 'USER_NOT_FOUND' });
 
+    // Create a new access token with explicit expiration time
+    const now = Math.floor(Date.now() / 1000); // Current time in seconds
+    const accessTokenExpiry = now + 2 * 60 * 60; // 2 hours from now
+
     const accessToken = sign(
-      { id: user.uniqueId, username: user.lastNickname, role: Role.USER },
+      {
+        id: user.uniqueId,
+        username: user.lastNickname,
+        role: authData.role || Role.USER, // Use the role from the refresh token or default to USER
+        iat: now,
+        exp: accessTokenExpiry,
+      },
       env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '2h' },
     );
-    return { accessToken };
+    // Return the new access token
+    return {
+      accessToken,
+      // Include the username and role for consistency
+      username: user.lastNickname,
+      role: authData.role || Role.USER,
+    };
   }
 }

@@ -61,7 +61,7 @@ export class BansController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: './uploads/proofs',
+        destination: './public/',
         filename: (req, file, cb) => {
           const uniqueSuffix =
             Date.now() + '-' + Math.round(Math.random() * 1e9);
@@ -93,7 +93,7 @@ export class BansController {
   }
 
   @Get(':id/proofs')
-  @DecoratorWrapper('get ban proofs', true, [Role.USER, Role.ADMIN, Role.MODER])
+  @DecoratorWrapper('get ban proofs')
   async getProofs(@Param('id', ParseIntPipe) id: number) {
     return CoreApiResponse.success(await this.bansService.getProofs(id));
   }

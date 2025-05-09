@@ -13,12 +13,10 @@ import { BoxpvpDatabaseModule } from '../database/database.module';
 @Module({
   imports: [
     BoxpvpDatabaseModule,
-    TypeOrmModule.forFeature([
-      Player,
-      Group,
-      GroupPermissions,
-      PlayerPermissions,
-    ]),
+    TypeOrmModule.forFeature(
+      [Player, Group, GroupPermissions, PlayerPermissions],
+      'boxpvp_rank', // Specify the connection name for the rank database
+    ),
   ],
   controllers: [PermissionsController],
   providers: [PermissionsService],
