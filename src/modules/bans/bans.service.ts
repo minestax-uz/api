@@ -13,9 +13,10 @@ import { HttpError } from 'src/common/exception/http.error';
 @Injectable()
 export class BansService {
   constructor(
-    @InjectRepository(Bans) private readonly bansRepo: Repository<Bans>,
-    @InjectRepository(Proof) private readonly proofRepo: Repository<Proof>,
-    @InjectRepository(Comment)
+    @InjectRepository(Bans, 'bans') private readonly bansRepo: Repository<Bans>,
+    @InjectRepository(Proof, 'bans')
+    private readonly proofRepo: Repository<Proof>,
+    @InjectRepository(Comment, 'bans')
     private readonly commentRepo: Repository<Comment>,
   ) {}
 
@@ -42,14 +43,14 @@ export class BansService {
         'formatted_time',
       )
       .addSelect(
-        `CASE 
+        `CASE
           WHEN b.until = 0 THEN 'Permanent'
           ELSE DATE_FORMAT(FROM_UNIXTIME(b.until/1000), '%m/%d/%Y, %h:%i %p')
         END`,
         'formatted_until',
       )
       .addSelect(
-        `CASE 
+        `CASE
           WHEN b.removed_by_uuid IS NOT NULL THEN 'removed'
           WHEN b.until = 0 THEN 'permanent'
           WHEN b.until > (UNIX_TIMESTAMP() * 1000) THEN 'active'

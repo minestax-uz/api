@@ -1,18 +1,21 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BansService } from './bans.service';
-import { BansController } from './bans.controller';
+import { BaseDbConfig } from 'src/common/database/database.config';
 import { Bans } from 'src/common/database/entities/bans/bans.entity';
 import { Comment } from 'src/common/database/entities/bans/comments.entity';
 import { Proof } from 'src/common/database/entities/bans/proof.entity';
-import { BansDatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
-    BansDatabaseModule,
-    TypeOrmModule.forFeature([Bans, Comment, Proof], 'bans'),
+    // Bans database connection
+    TypeOrmModule.forRoot({
+      ...BaseDbConfig,
+      name: 'bans',
+      database: 's1_bans',
+      entities: [Bans, Comment, Proof],
+      synchronize: false,
+    }),
   ],
-  controllers: [BansController],
-  providers: [BansService],
+  exports: [TypeOrmModule],
 })
-export class BansModule {}
+export class BansDatabaseModule {}

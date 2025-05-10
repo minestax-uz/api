@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({ database: 's1_bans', name: 'proofs' })
+@Entity({ name: 'proofs' })
 export class Proof {
   @PrimaryGeneratedColumn()
   id: number;
