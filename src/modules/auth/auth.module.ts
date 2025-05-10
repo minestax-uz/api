@@ -10,9 +10,9 @@ import { BoxpvpPermissionsModule as BoxpvpPermissions } from '../boxpvp/permissi
 @Module({
   imports: [
     TypeOrmModule.forFeature([Auth], 'default'),
-    BoxpvpPermissions,
     AnarxiyaPermissions,
     SurvivalPermissions,
+    BoxpvpPermissions,
   ],
   controllers: [AuthController],
   providers: [AuthService],

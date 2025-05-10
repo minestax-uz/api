@@ -17,9 +17,9 @@ import { SurvivalPermissionsService as SurvivalRankService } from 'src/modules/s
 export class AuthService {
   constructor(
     @InjectRepository(Auth) private readonly authRepo: Repository<Auth>,
-    private boxpvpRankService: BoxpvpRankService,
     private anarxiyaRankService: AnarxiyaRankService,
     private survivalRankService: SurvivalRankService,
+    private boxpvpRankService: BoxpvpRankService,
   ) {}
 
   async getPlayerRole(username: string): Promise<'admin' | 'moder' | 'user'> {
