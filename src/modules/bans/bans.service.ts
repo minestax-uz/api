@@ -193,13 +193,10 @@ export class BansService {
     const ban = await this.bansRepo.findOne({ where: { id: +dto.ban_id } });
     if (!ban) throw new HttpError({ code: 'BAN_NOT_FOUND' });
 
-    const fileExtension = file.originalname.split('.').pop();
-    const filePath = `public/${dto.ban_id}-${Date.now().toString(15)}.${fileExtension}`;
-
     const proof = this.proofRepo.create({
       ban_id: +dto.ban_id,
       moderator_name: username,
-      file_path: filePath,
+      file_path: file.path,
       file_type: file.mimetype.split('/')[0],
     });
 
