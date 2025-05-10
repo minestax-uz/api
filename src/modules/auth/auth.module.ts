@@ -3,16 +3,16 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Auth } from 'src/common/database/entities/auth.entity';
-import { AnarxiyaPermissionsModule as AnarxiyaPermissions } from '../anarxiya/permissions/permissions.module';
-import { SurvivalPermissionsModule as SurvivalPermissions } from '../survival/permissions/permissions.module';
-import { BoxpvpPermissionsModule as BoxpvpPermissions } from '../boxpvp/permissions/permissions.module';
+import { AnarxiyaPermissionsModule } from '../anarxiya/permissions/permissions.module';
+import { SurvivalPermissionsModule } from '../survival/permissions/permissions.module';
+import { BoxpvpPermissionsModule } from '../boxpvp/permissions/permissions.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Auth], 'default'),
-    AnarxiyaPermissions,
-    SurvivalPermissions,
-    BoxpvpPermissions,
+    AnarxiyaPermissionsModule,
+    SurvivalPermissionsModule,
+    BoxpvpPermissionsModule,
   ],
   controllers: [AuthController],
   providers: [AuthService],

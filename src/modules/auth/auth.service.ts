@@ -9,17 +9,17 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Auth } from 'src/common/database/entities/auth.entity';
 import { sign, verify } from 'jsonwebtoken';
 import { compare } from 'src/common/utils/hash/hashing.utils';
-import { AnarxiyaPermissionsService as AnarxiyaRankService } from 'src/modules/anarxiya/permissions/permissions.service';
-import { SurvivalPermissionsService as SurvivalRankService } from 'src/modules/survival/permissions/permissions.service';
-import { BoxpvpPermissionsService as BoxpvpRankService } from 'src/modules/boxpvp/permissions/permissions.service';
+import { AnarxiyaPermissionsService } from 'src/modules/anarxiya/permissions/permissions.service';
+import { SurvivalPermissionsService } from 'src/modules/survival/permissions/permissions.service';
+import { BoxpvpPermissionsService } from 'src/modules/boxpvp/permissions/permissions.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(Auth) private readonly authRepo: Repository<Auth>,
-    private anarxiyaRankService: AnarxiyaRankService,
-    private survivalRankService: SurvivalRankService,
-    private boxpvpRankService: BoxpvpRankService,
+    private anarxiyaRankService: AnarxiyaPermissionsService,
+    private survivalRankService: SurvivalPermissionsService,
+    private boxpvpRankService: BoxpvpPermissionsService,
   ) {}
 
   async getPlayerRole(username: string): Promise<'admin' | 'moder' | 'user'> {
