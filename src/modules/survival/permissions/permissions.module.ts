@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PermissionsController } from './permissions.controller';
-import { PermissionsService } from './permissions.service';
+import { SurvivalPermissionsService } from './permissions.service';
 import {
   Group,
   GroupPermissions,
@@ -19,7 +19,7 @@ import { SurvivalDatabaseModule } from '../database/database.module';
     ),
   ],
   controllers: [PermissionsController],
-  providers: [PermissionsService],
-  exports: [PermissionsService],
+  providers: [SurvivalPermissionsService],
+  exports: [SurvivalPermissionsService],
 })
 export class SurvivalPermissionsModule {}

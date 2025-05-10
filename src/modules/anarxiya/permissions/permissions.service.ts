@@ -11,7 +11,7 @@ import {
 import { BasePermissionsService } from 'src/common/service/basePermisson.service';
 
 @Injectable()
-export class PermissionsService extends BasePermissionsService {
+export class AnarxiyaPermissionsService extends BasePermissionsService {
   constructor(
     @InjectRepository(Group, 'anarxiya_rank') groupRepo: Repository<Group>,
     @InjectRepository(Player, 'anarxiya_rank') playersRepo: Repository<Player>,

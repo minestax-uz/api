@@ -9,9 +9,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Auth } from 'src/common/database/entities/auth.entity';
 import { sign, verify } from 'jsonwebtoken';
 import { compare } from 'src/common/utils/hash/hashing.utils';
-import { PermissionsService as BoxpvpRankService } from 'src/modules/boxpvp/permissions/permissions.service';
-import { PermissionsService as AnarxiyaRankService } from 'src/modules/anarxiya/permissions/permissions.service';
-import { PermissionsService as SurvivalRankService } from 'src/modules/survival/permissions/permissions.service';
+import { BoxpvpPermissionsService as BoxpvpRankService } from 'src/modules/boxpvp/permissions/permissions.service';
+import { AnarxiyaPermissionsService as AnarxiyaRankService } from 'src/modules/anarxiya/permissions/permissions.service';
+import { SurvivalPermissionsService as SurvivalRankService } from 'src/modules/survival/permissions/permissions.service';
 
 @Injectable()
 export class AuthService {

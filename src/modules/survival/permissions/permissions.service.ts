@@ -10,7 +10,7 @@ import {
 import { BasePermissionsService } from 'src/common/service/basePermisson.service';
 
 @Injectable()
-export class PermissionsService extends BasePermissionsService {
+export class SurvivalPermissionsService extends BasePermissionsService {
   constructor(
     @InjectRepository(Group, 'survival_rank') groupRepo: Repository<Group>,
     @InjectRepository(Player, 'survival_rank') playersRepo: Repository<Player>,

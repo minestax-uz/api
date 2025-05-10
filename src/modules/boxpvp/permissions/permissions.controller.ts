@@ -11,13 +11,13 @@ import { ApiTags } from '@nestjs/swagger';
 import { CoreApiResponse } from 'src/common/response/core.response';
 
 import { DecoratorWrapper } from 'src/common/auth/decorator.auth';
-import { PermissionsService } from './permissions.service';
+import { BoxpvpPermissionsService } from './permissions.service';
 import { Role } from 'src/common/auth/roles/role.enum';
 
 @ApiTags('permissions')
 @Controller('boxpvp/permissions')
 export class PermissionsController {
-  constructor(private readonly permissionsService: PermissionsService) {}
+  constructor(private readonly permissionsService: BoxpvpPermissionsService) {}
 
   @Get('/:username')
   @DecoratorWrapper('get permissions')

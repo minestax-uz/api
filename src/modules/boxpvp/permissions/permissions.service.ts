@@ -10,7 +10,7 @@ import {
 import { BasePermissionsService } from 'src/common/service/basePermisson.service';
 
 @Injectable()
-export class PermissionsService extends BasePermissionsService {
+export class BoxpvpPermissionsService extends BasePermissionsService {
   constructor(
     @InjectRepository(Group, 'boxpvp_rank') groupRepo: Repository<Group>,
     @InjectRepository(Player, 'boxpvp_rank') playersRepo: Repository<Player>,
