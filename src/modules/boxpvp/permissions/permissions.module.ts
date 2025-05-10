@@ -22,4 +22,4 @@ import { BoxpvpDatabaseModule } from '../database/database.module';
   providers: [PermissionsService],
   exports: [PermissionsService],
 })
-export class PermissionsModule {}
+export class BoxpvpPermissionsModule {}

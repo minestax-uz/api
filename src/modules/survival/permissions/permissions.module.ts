@@ -22,4 +22,4 @@ import { SurvivalDatabaseModule } from '../database/database.module';
   providers: [PermissionsService],
   exports: [PermissionsService],
 })
-export class PermissionsModule {}
+export class SurvivalPermissionsModule {}
