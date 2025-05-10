@@ -8,7 +8,6 @@ import {
   PlayerPermissions,
 } from '../database/entities/root/permissons.entity';
 
-@Injectable()
 export class BasePermissionsService {
   constructor(
     private groupRepo: Repository<Group>,
