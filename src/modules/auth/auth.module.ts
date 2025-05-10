@@ -7,10 +7,12 @@ import { AnarxiyaPermissionsModule } from '../anarxiya/permissions/permissions.m
 import { SurvivalPermissionsModule } from '../survival/permissions/permissions.module';
 import { BoxpvpPermissionsModule } from '../boxpvp/permissions/permissions.module';
 import { PermissionsWrapperService } from './permissions.wrapper.service';
+import { AuthDatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Auth], 'default'),
+    AuthDatabaseModule,
+    TypeOrmModule.forFeature([Auth], 'auth'), // Use 'auth' connection instead of 'default'
     AnarxiyaPermissionsModule,
     SurvivalPermissionsModule,
     BoxpvpPermissionsModule,

@@ -1,7 +1,7 @@
 import { Exclude } from 'class-transformer';
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity({ database: 's1_auth', name: 'user_profiles' })
+@Entity({ name: 'user_profiles' })
 export class Auth {
   @PrimaryColumn()
   uniqueId: string;

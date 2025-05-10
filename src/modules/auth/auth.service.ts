@@ -14,7 +14,7 @@ import { PermissionsWrapperService } from './permissions.wrapper.service';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(Auth) private readonly authRepo: Repository<Auth>,
+    @InjectRepository(Auth, 'auth') private readonly authRepo: Repository<Auth>,
     private permissionsService: PermissionsWrapperService,
   ) {}
 
