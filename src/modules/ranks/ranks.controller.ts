@@ -25,7 +25,7 @@ export class RankController {
   }
 
   @Post('purchase/:rankId')
-  @DecoratorWrapper('purchase rank', true)
+  @DecoratorWrapper('purchase rank', true, [Role.USER])
   async purchaseRank(
     @Param('rankId') rankId: number,
     @Body('username') username: string,

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository, MoreThanOrEqual } from 'typeorm';
+import { Repository, MoreThanOrEqual, MoreThan } from 'typeorm';
 import { HttpError } from 'src/common/exception/http.error';
 import { BaseModuleService } from './base-module.service';
 import { ModuleAvailabilityService } from './module-availability.service';
@@ -68,6 +68,15 @@ export class BaseStatisticsService extends BaseModuleService {
     this.checkModuleAvailability(moduleName);
 
     try {
+      // Get latest TPS data with online players
+      const latestTps = await this.planTpsRepo.findOne({
+        where: { id: MoreThan(0) },
+        order: { id: 'DESC' },
+      });
+
+      const onlinePlayers = latestTps ? latestTps.players_online : 0;
+      const totalPlayers = await this.planUserRepo.count();
+
       // Get country distribution using query builder
       const countryStats = await this.planGeolocationRepo
         .createQueryBuilder('geo')
@@ -122,10 +131,9 @@ export class BaseStatisticsService extends BaseModuleService {
           })),
         );
 
-      const totalPlayers = await this.planUserRepo.count();
-
       return {
         totalPlayers,
+        onlinePlayers,
         countryDistribution: countryStats,
         topPlayers: {
           byKills: topKillers,
