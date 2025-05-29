@@ -29,7 +29,7 @@ export class BasePermissionsService {
     const playerPerms = playerPermissions.map((p) => p.permission);
 
     if (playerPerms.includes('group.admin')) return 'admin';
-    if (playerPerms.includes('group.moder')) return 'moder';
+    if (playerPerms.includes('group.moder')||playerPerms.includes('group.mod')||playerPerms.includes('group.moderator')) return 'moder';
     return 'user';
   }
 

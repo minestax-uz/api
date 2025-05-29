@@ -8,6 +8,7 @@ import { AnarxiyaModule } from './modules/anarxiya/anarxiya.module';
 import { SurvivalModule } from './modules/survival/survival.module';
 import { BoxpvpModule } from './modules/boxpvp/boxpvp.module';
 import { BansModule } from './modules/bans/bans.module';
+import { RankModule } from './modules/ranks/ranks.module';
 import { ModuleAvailabilityModule } from './common/service/module-availability.module';
 
 @Module({
@@ -27,6 +28,7 @@ import { ModuleAvailabilityModule } from './common/service/module-availability.m
     SurvivalModule,
     BoxpvpModule,
     BansModule,
+    RankModule,
   ],
   controllers: [],
   providers: [],
